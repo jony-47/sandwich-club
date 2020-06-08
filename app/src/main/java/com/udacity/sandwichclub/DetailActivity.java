@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,9 @@ import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -71,10 +75,18 @@ public class DetailActivity extends AppCompatActivity {
         TextView also_known_tv = findViewById(R.id.also_known_tv);
         TextView ingredients_tv = findViewById(R.id.ingredients_tv);
         TextView description_tv = findViewById(R.id.description_tv);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("No Data Available");
 
-            also_known_tv.setText(TextUtils.join(", ",sandwich.getAlsoKnownAs()));
+        if (sandwich.getAlsoKnownAs().isEmpty()){
 
+            sandwich.setAlsoKnownAs(list);
+        }
+        if (sandwich.getPlaceOfOrigin().isEmpty()){
+            sandwich.setPlaceOfOrigin("No Data Available");
+        }
 
+        also_known_tv.setText(TextUtils.join(", ",sandwich.getAlsoKnownAs()));
         origin_tv.setText(sandwich.getPlaceOfOrigin());
         description_tv.setText(sandwich.getDescription());
 
