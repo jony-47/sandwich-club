@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class JsonUtils {
      public static final String J_OBJ_NAME = "name";
-     public static final String J_OBJ_MAIN_NAME = "main_name";
+     public static final String J_OBJ_MAIN_NAME = "mainName";
      public static final String J_OBJ_AlSO_KNOWN_AS = "alsoKnownAs";
-     public static final String J_OBJ_DESCRIPTION = "descroption";
+     public static final String J_OBJ_DESCRIPTION = "description";
      public static final String J_OBJ_PLACE_OF_ORIGIN = "placeOfOrigin";
      public static final String J_OBJ_INGREDIENTS = "ingredients";
      public static final String J_OBJ_IMAGE = "image";
