@@ -22,6 +22,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
+    public static final String NO_DATA_AVAILABLE = "No Data Available";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class DetailActivity extends AppCompatActivity {
         if (intent == null) {
             closeOnError();
         }
+
 
         int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
         if (position == DEFAULT_POSITION) {
@@ -59,41 +61,35 @@ public class DetailActivity extends AppCompatActivity {
         populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.noimg)
                 .into(ingredientsIv);
 
         setTitle(sandwich.getMainName());
     }
-
     private void closeOnError() {
         finish();
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
-
     private void populateUI(Sandwich sandwich) {
-
         TextView origin_tv = findViewById(R.id.origin_tv);
         TextView also_known_tv = findViewById(R.id.also_known_tv);
         TextView ingredients_tv = findViewById(R.id.ingredients_tv);
         TextView description_tv = findViewById(R.id.description_tv);
         ArrayList<String> list = new ArrayList<>();
-        list.add("No Data Available");
+        list.add(NO_DATA_AVAILABLE);
 
         if (sandwich.getAlsoKnownAs().isEmpty()){
-
             sandwich.setAlsoKnownAs(list);
         }
+
         if (sandwich.getPlaceOfOrigin().isEmpty()){
-            sandwich.setPlaceOfOrigin("No Data Available");
+            sandwich.setPlaceOfOrigin(NO_DATA_AVAILABLE);
         }
 
         also_known_tv.setText(TextUtils.join(", ",sandwich.getAlsoKnownAs()));
         origin_tv.setText(sandwich.getPlaceOfOrigin());
         description_tv.setText(sandwich.getDescription());
-
-
         ingredients_tv.setText(TextUtils.join("," ,sandwich.getIngredients()));
-
-
-
     }
 }
